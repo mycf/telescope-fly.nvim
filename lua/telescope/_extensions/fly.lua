@@ -8,7 +8,7 @@ local query = require 'telescope._extensions.fly.picker'
 
 return telescope.register_extension {
     setup = function(opts, _)
-        opts = vim.tbl_extend('force', default_opts, opts)
+        -- opts = vim.tbl_extend('force', default_opts, opts)
     end,
     exports = {
         fly_query = query,
