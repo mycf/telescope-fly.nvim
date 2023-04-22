@@ -1,7 +1,7 @@
 local async_static_finder = require("telescope.finders.async_static_finder")
 
 local function getFlypy()
-  print(require('debug').getinfo(1, "S").source:sub(2))
+  print(vim.fn.dirname(require('debug').getinfo(1, "S").source:sub(2)))
 	return vim.json.decode(vim.fn.join(vim.fn.readfile(vim.fn.expand("%:h") .. "/flypy_n.json"), "\n"))
 end
 
