@@ -1,4 +1,5 @@
 # 小鹤查形
+![Preview](https://i.imgur.com/TTTja6t.gif)
 
 ```
 
@@ -17,7 +18,7 @@
           telescope.load_extension "fly"
         end,
     keys = {
-      { "[[", desc = "Prev Reference" },
+      {'<leader>fl', '<cmd>Telescope fly<cr>', mode = 'n', desc = '小鹤查形'}
     },
       },
     },
