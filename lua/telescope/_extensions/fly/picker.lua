@@ -7,7 +7,7 @@ local entry_display = require("telescope.pickers.entry_display")
 local function getFlypy()
 	return vim.json.decode(
 		vim.fn.join(
-			vim.fn.readfile(vim.fs.dirname(require("debug").getinfo(1, "S").source:sub(2)) .. "/flypy_n.json"),
+			vim.fn.readfile(vim.fs.dirname(debug.getinfo(1, "S").source:sub(2)) .. "/flypy_n.json"),
 			"\n"
 		)
 	)
