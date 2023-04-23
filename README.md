@@ -1,3 +1,4 @@
+# 小鹤查形
 
 ```
 
@@ -15,6 +16,12 @@
           local telescope = require "telescope"
           telescope.load_extension "fly"
         end,
+    keys = {
+      { "[[", desc = "Prev Reference" },
+    },
       },
     },
 ```
+
+## 数据来源于
+- [zerovip/flypy_things](https://github.com/mycf/telescope-fly.nvim)
