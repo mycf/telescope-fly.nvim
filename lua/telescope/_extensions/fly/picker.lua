@@ -1,12 +1,17 @@
 local async_static_finder = require("telescope.finders.async_static_finder")
 
-local function getFlypy()
-	return vim.json.decode(vim.fn.join(vim.fn.readfile(vim.fs.dirname(require('debug').getinfo(1, "S").source:sub(2)) .. "/flypy_n.json"), "\n"))
-end
-
 -- 定义一个自定义的Telescope查找器
 local pickers = require("telescope.pickers")
+local sorters = require("telescope.pickers")
 local entry_display = require("telescope.pickers.entry_display")
+local function getFlypy()
+	return vim.json.decode(
+		vim.fn.join(
+			vim.fn.readfile(vim.fs.dirname(require("debug").getinfo(1, "S").source:sub(2)) .. "/flypy_n.json"),
+			"\n"
+		)
+	)
+end
 
 local yu_maker = function()
 	local displayer = entry_display.create({
@@ -37,7 +42,7 @@ local yu_maker = function()
 		}
 	end
 end
-local fly_finder = function(opts)
+local fly_finder = function(opts, _)
 	opts = opts or {}
 	return async_static_finder({
 		results = getFlypy(),
@@ -45,7 +50,6 @@ local fly_finder = function(opts)
 	})
 end
 
--- -- 定义一个自定义的Telescope选择器
 return function(opts)
 	opts = opts or {}
 	pickers
