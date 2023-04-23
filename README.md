@@ -1,5 +1,4 @@
 # 小鹤查形
-![Preview](https://i.imgur.com/TTTja6t.gif)
 
 ```
 
