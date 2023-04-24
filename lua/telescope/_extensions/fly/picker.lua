@@ -57,10 +57,9 @@ return function(opts)
 					if #prompt == 0 then
 						return 1
 					end
-					return prompt:find(entry.name) and entry.index or -1
+					return prompt:find(entry.name) or -1
 				end,
 			}),
 		})
 		:find()
 end
-
