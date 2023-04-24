@@ -2,14 +2,11 @@ local async_static_finder = require("telescope.finders.async_static_finder")
 
 -- 定义一个自定义的Telescope查找器
 local pickers = require("telescope.pickers")
-local sorters = require("telescope.pickers")
+local sorters = require("telescope.sorters")
 local entry_display = require("telescope.pickers.entry_display")
 local function getFlypy()
 	return vim.json.decode(
-		vim.fn.join(
-			vim.fn.readfile(vim.fs.dirname(debug.getinfo(1, "S").source:sub(2)) .. "/flypy_n.json"),
-			"\n"
-		)
+		vim.fn.join(vim.fn.readfile(vim.fs.dirname(debug.getinfo(1, "S").source:sub(2)) .. "/flypy_n.json"), "\n")
 	)
 end
 
@@ -49,17 +46,21 @@ local fly_finder = function(opts, _)
 		entry_maker = yu_maker(opts),
 	})
 end
-
 return function(opts)
 	opts = opts or {}
 	pickers
 		.new(opts, {
 			prompt_title = "小鹤查形",
 			finder = fly_finder(opts),
-			sorter = require("telescope.sorters").get_fzy_sorter(),
+			sorter = sorters.Sorter:new({
+				scoring_function = function(_, prompt, _, entry)
+					if #prompt == 0 then
+						return 1
+					end
+					return prompt:find(entry.name) and entry.index or -1
+				end,
+			}),
 		})
 		:find()
 end
 
--- 将自定义的Telescope选择器映射到快捷键
--- vim.keymap.set("n", "<Leader>fl", lua_selector, { noremap = true, silent = true })
